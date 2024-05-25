@@ -1,11 +1,10 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from 'mongoose'
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const cardSchema = new Schema(
   {
     name: String,
     image: String,
-    mana_cost:  String,
+    mana_cost: String,
     cmc: Number,
     type_line: String,
     oracle_text: String,
@@ -18,5 +17,4 @@ const cardSchema = new Schema(
   }
 );
 
-
-module.exports = model("Card", cardSchema);
+export const CardModel = model("Card", cardSchema);
