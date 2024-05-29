@@ -1,0 +1,19 @@
+.btn {
+  margin-top: 12px;
+  width: 100%;
+  padding-block: 12px;
+  font-size: 20px;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-login {
+  background-color: #59047533;
+  border: 1px solid #8740cd;
+}
+
+.btn-signin {
+  background-color: #040f7533;
+  border: 1px solid #2e4cee;
+}
