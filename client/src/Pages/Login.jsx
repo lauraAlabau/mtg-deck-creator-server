@@ -57,11 +57,17 @@ const Login = () => {
       <GradientCircle
         size={"medium"}
         color={"purple"}
-        alignItems={"align-end"}
+        alignItems={"align-center"}
         justifyContent={"justify-end"}
       />
+      <GradientCircle
+        size={"small"}
+        color={"purple"}
+        alignItems={"align-end"}
+        justifyContent={"justify-center"}
+      />
       <div className="bg"></div>
-      <main className="container">
+      <main className="view-container">
         <p className="left-side">Welcome back!</p>
         <div className="right-side">
           <div className="form-container">

@@ -1,61 +1,65 @@
 /* eslint-disable react/no-unescaped-entities */
+import axios from "axios";
 
-
-// import { useContext, useState } from "react";
-// import axios from "axios";
-// import { BASE_URL } from "../_utils";
-// import { useRouter } from "next/navigation";
-// import { UserContext } from "../_contexts/UserContext";
-
-import "../assets/css/login.css";
-import GradientCircle from "../Components/GradientCircle";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify'
+
+import { BASE_URL } from "../Utils/Constants";
+import GradientCircle from "../Components/GradientCircle";
 import Navbar from "../Components/Navbar";
+import Validation from "../Utils/Validation";
+
+import "react-toastify/dist/ReactToastify.css"
+import "../assets/css/login.css";
 
 const Signup = () => {
-  // const router = useRouter();
-  // const [values, setValues] = useState({
-  // name: "",
-  //   email: "",
-  //   password: "",
-  // });
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  // const [errors, setErrors] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  // });
+  const [errors, setErrors] = useState({});
 
-  // const { setUser } = useContext(UserContext);
+  // const [serverErrors, setServerErrors] = useState([]);
+
   const handleChange = (event) => {
-    console.log(event)
-    //   setValues({ ...values, [event.target.name]: event.target.value });
+    console.log({ [event.target.name]: event.target.value })
+    setValues({ ...values, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Signup Work In Progress')
-    // const errs = Validation(values);
-    // setErrors(errs);
+    const errs = Validation(values);
+    setErrors(errs);
 
-    // if (!errors.name || !errors.email || !errors.password) {
-    //   console.log("Form submitted successfully");
-    //   axios
-    //     .post("", values)
-    //     .then((res) => {
-    //       if (res.status === 200) {
-    //         router.push("/search");
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       if (err.response) {
-    //         console.log(
-    //           "Error msg:",
-    //           `${err.response.status} - ${err.response.data}`
-    //         );
-    //       }
-    //     });
-    // }
+    if (!errors.name || !errors.email || !errors.password) {
+      console.log("Form submitted successfully");
+      axios
+        .post(`${BASE_URL}contactmsyt/register`, values)
+        .then((res) => {
+          toast.success("Account created successfully", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+            closeOnClick: true
+          })
+          console.log({ res })
+          // if (res.status === 200) {
+          //   router.push("/search");
+          // }
+        })
+        .catch((err) => {
+          if (err.response) {
+            console.log(
+              "Error msg:",
+              `${err.response.status} - ${err.response.data}`
+            );
+          }
+        });
+    }
   };
 
   return (
@@ -67,14 +71,21 @@ const Signup = () => {
         alignItems={"align-start"}
         justifyContent={"justify-center"}
       />
+
       <GradientCircle
         size={"medium"}
         color={"blue"}
-        alignItems={"align-end"}
+        alignItems={"align-center"}
         justifyContent={"justify-end"}
       />
+      <GradientCircle
+        size={"small"}
+        color={"blue"}
+        alignItems={"align-end"}
+        justifyContent={"justify-center"}
+      />
       <div className="bg"></div>
-      <main className="container">
+      <main className="view-container">
         <p className="left-side">Join the tribe!</p>
         <div className="right-side">
           <div className="form-container">
@@ -82,7 +93,7 @@ const Signup = () => {
               <p className="form-title">Create your account</p>
               <p className="form-summary">Just some details to get you in!</p>
               <div className="form-group">
-                <label htmlFor="email" className="form-label">
+                <label htmlFor="name" className="form-label">
                   Username:
                 </label>
                 <input
@@ -90,8 +101,9 @@ const Signup = () => {
                   placeholder="John"
                   autoComplete="off"
                   onChange={handleChange}
+                  name="name"
                 />
-                {/* {!!errors.name && <p className="error">{errors.name}</p>} */}
+                {!!errors.name && <p className="error">{errors.name}</p>}
               </div>
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
@@ -104,7 +116,7 @@ const Signup = () => {
                   onChange={handleChange}
                   name="email"
                 />
-                {/* {!!errors.email && <p className="error">{errors.email}</p>} */}
+                {!!errors.email && <p className="error">{errors.email}</p>}
               </div>
               <div className="form-group">
                 <label htmlFor="password" className="form-label">
@@ -117,7 +129,7 @@ const Signup = () => {
                   onChange={handleChange}
                   name="password"
                 />
-                {/* {!!errors.password && <p className="error">{errors.password}</p>} */}
+                {!!errors.password && <p className="error">{errors.password}</p>}
               </div>
               <button className="btn btn-signin">Sign up</button>
             </form>

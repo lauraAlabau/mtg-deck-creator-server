@@ -9,12 +9,13 @@
   bottom: 0;
   left: 0;
 }
-.container {
+.view-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 60px;
   position: relative;
+  height: calc(100vh - 77px);
 }
 
 .left-side {
@@ -93,4 +94,9 @@ input[type="password"]::placeholder {
 
 .form-container a:hover {
   color: #fff;
+}
+
+.error {
+  color: rgb(255, 102, 102);
+  padding-top: 5px;
 }
