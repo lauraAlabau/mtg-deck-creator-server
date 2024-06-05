@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import Validation from "../_utils";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export type FormInputs = {
   name: string;
@@ -11,6 +12,7 @@ export type FormInputs = {
   password: string;
 };
 export default function Page() {
+  const router = useRouter();
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -36,9 +38,18 @@ export default function Page() {
       console.log("Form submitted successfully");
       axios
         .post("", values)
-        .then((res) => console.log({ res }))
+        .then((res) => {
+          if (res.status === 200) {
+            router.push("/search");
+          }
+        })
         .catch((err) => {
-          console.log(err);
+          if (err.response) {
+            console.log(
+              "Error msg:",
+              `${err.response.status} - ${err.response.data}`
+            );
+          }
         });
     }
   };
