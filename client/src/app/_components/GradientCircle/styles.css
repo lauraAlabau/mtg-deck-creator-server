@@ -1,8 +1,8 @@
 .container {
   position: absolute;
-  top: 60px;
+  top: 100px;
   right: 0;
-  bottom: 60px;
+  bottom: 40px;
   left: 0;
   z-index: 0;
   display: flex;

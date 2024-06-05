@@ -1,6 +1,6 @@
 import { FormInputs } from "../signin/page";
-import dotenv from "dotenv";
-dotenv.config({ path: "../.env" });
+
+import "dotenv/config";
 
 export default function Validation(values: FormInputs) {
   let errors = {

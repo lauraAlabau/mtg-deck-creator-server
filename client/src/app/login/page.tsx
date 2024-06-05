@@ -7,6 +7,8 @@ import { BASE_URL } from "../_utils";
 import { useRouter } from "next/navigation";
 import { UserContext } from "../_contexts/UserContext";
 import "dotenv/config";
+import "./styles.css";
+import { GradientCircle } from "../_components";
 
 export default function Page() {
   const router = useRouter();
@@ -42,13 +44,26 @@ export default function Page() {
 
   return (
     <>
-      <main className="form-container">
-        <h1>Welcome back .!</h1>
+      <GradientCircle
+        size={"large"}
+        color={"purple"}
+        alignItems={"align-start"}
+        justifyContent={"justify-center"}
+      />
+      <GradientCircle
+        size={"medium"}
+        color={"purple"}
+        alignItems={"align-end"}
+        justifyContent={"justify-end"}
+      />
+      <div className="bg"></div>
+      <main className="container">
+        <p className="left-side">Welcome back .!</p>
         <div className="right-side">
-          <div className="greeting-container">
+          <div className="form-container">
             <form className="form" onSubmit={handleLog}>
-              <h2>Log in your account</h2>
-
+              <p className="form-title">Log in your account</p>
+              <p className="form-summary">Glad you’re back!</p>
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
                   Email:
@@ -73,9 +88,9 @@ export default function Page() {
                   name="password"
                 />
               </div>
-              <button className="form-btn">Log in</button>
+              <button className="btn btn-login">Login</button>
             </form>
-            <p>
+            <p className="footer">
               Don't have an account ? <Link href="/signin">Sign in</Link>
             </p>
           </div>

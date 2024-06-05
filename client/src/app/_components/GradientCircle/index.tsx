@@ -8,7 +8,7 @@ type GradientCircleProps = {
   justifyContent: "justify-center" | "justify-start" | "justify-end";
 };
 
-const GradientCircle = ({
+export const GradientCircle = ({
   size,
   color,
   alignItems,
@@ -20,5 +20,3 @@ const GradientCircle = ({
     </div>
   );
 };
-
-export default GradientCircle;
