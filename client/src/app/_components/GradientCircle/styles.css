@@ -1,0 +1,59 @@
+.container {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 60px;
+  left: 0;
+  z-index: 0;
+  display: flex;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.small {
+  width: 100px;
+  height: 100px;
+}
+.medium {
+  width: 200px;
+  height: 200px;
+}
+.large {
+  width: 300px;
+  height: 300px;
+}
+
+.purple {
+  background: linear-gradient(to bottom, #530061, #0d0a30);
+}
+.green {
+  background: linear-gradient(to bottom, #67691c, #090a02);
+}
+.violet {
+  background: linear-gradient(to bottom, #492b4e, #1e1313);
+}
+.turquoise {
+  background: linear-gradient(to bottom, #2b4c4e, #1e1c13);
+}
+
+.align-center {
+  align-items: center;
+}
+.align-start {
+  align-items: start;
+}
+.align-end {
+  align-items: end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+.justify-start {
+  justify-content: start;
+}
+.justify-end {
+  justify-content: end;
+}
