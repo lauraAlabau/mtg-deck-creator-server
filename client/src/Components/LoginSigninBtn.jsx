@@ -1,15 +1,12 @@
-import Link from "next/link";
-import "./styles.css";
+import { Link } from 'react-router-dom';
+import '../assets/css/loginSigninBtn.css'
 
-type BtnProps = {
-  buttonType: "login" | "signin";
-};
-export const LoginSigninBtn = ({ buttonType }: BtnProps) => {
+const LoginSigninBtn = ({ buttonType }) => {
   const button =
     buttonType === "login" ? (
       <>
         <p>Already have an account ?</p>
-        <Link href="/login">
+        <Link to="/login">
           <button className="btn btn-login">Login</button>
         </Link>
       </>
@@ -17,10 +14,12 @@ export const LoginSigninBtn = ({ buttonType }: BtnProps) => {
       <>
         <p>Don’t have an account ? </p>
 
-        <Link href="/signin" className="btn btn-signin">
+        <Link to="/signup" className="btn btn-signin">
           <button className="btn btn-signin">Sign In</button>
         </Link>
       </>
     );
   return button;
-};
+}
+
+export default LoginSigninBtn

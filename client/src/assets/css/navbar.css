@@ -1,7 +1,7 @@
-.nav-container {
+.navbar {
   position: sticky;
-  width: 100vw;
   top: 0;
+  margin: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,14 +12,14 @@
   text-transform: uppercase;
 }
 
-.nav {
+.navbar-left {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 50px;
 }
 
-.nav-pages {
+.navbar-pages {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -27,7 +27,16 @@
   color: #c2d1d6;
 }
 
-.nav-btn {
+.navbar-link {
+  color: #c2d1d6;
+  text-decoration: none;
+}
+.navbar-link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-right {
   display: flex;
   align-items: center;
   gap: 12px;

@@ -1,18 +1,20 @@
-import Link from "next/link";
-import React from "react";
-import "./styles.css";
-import { LoginSigninBtn } from "..";
 
-export const Homeview = () => {
+import '../assets/css/home.css'
+import LoginSigninBtn from '../Components/LoginSigninBtn'
+import Navbar from '../Components/Navbar'
+
+const Home = () => {
   return (
-    <main className="home-container">
-      <div className="right-side">
-        <div className="greeting-container">
-          <p className="greeting-title">
+    <>
+      <Navbar />
+      <div className="home">
+
+        <div className="home-container">
+          <p className="home-title">
             Welcome to <br />
             MTG DECK CREATOR
           </p>
-          <p className="greeting-summary">
+          <p className="home-summary">
             Search cards, add them to favorites, create a deck and print it to
             be ready for your next tournament.
           </p>
@@ -29,7 +31,10 @@ export const Homeview = () => {
             <LoginSigninBtn buttonType={"signin"} />
           </div>
         </div>
+
       </div>
-    </main>
-  );
-};
+    </>
+  )
+}
+
+export default Home

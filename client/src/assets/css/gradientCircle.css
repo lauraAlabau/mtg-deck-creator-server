@@ -28,6 +28,9 @@
 .purple {
   background: linear-gradient(to bottom, #530061, #0d0a30);
 }
+.blue {
+  background: linear-gradient(to bottom, #190061, #0a1b30);
+}
 .green {
   background: linear-gradient(to bottom, #67691c, #090a02);
 }

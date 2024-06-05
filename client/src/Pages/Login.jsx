@@ -1,49 +1,53 @@
 /* eslint-disable react/no-unescaped-entities */
-"use client";
-import Link from "next/link";
-import { useContext, useState } from "react";
-import axios from "axios";
-import { BASE_URL } from "../_utils";
-import { useRouter } from "next/navigation";
-import { UserContext } from "../_contexts/UserContext";
-import "dotenv/config";
-import "./styles.css";
-import { GradientCircle } from "../_components";
 
-export default function Page() {
-  const router = useRouter();
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-  });
-  const { setUser } = useContext(UserContext);
-  const handleChange = (event: any) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
+
+// import { useContext, useState } from "react";
+// import axios from "axios";
+// import { BASE_URL } from "../_utils";
+// import { useRouter } from "next/navigation";
+// import { UserContext } from "../_contexts/UserContext";
+
+import "../assets/css/login.css";
+import GradientCircle from "../Components/GradientCircle";
+import { Link } from "react-router-dom";
+import Navbar from "../Components/Navbar";
+
+const Login = () => {
+  // const router = useRouter();
+  // const [values, setValues] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+  // const { setUser } = useContext(UserContext);
+  const handleChange = (event) => {
+    console.log(event)
+    //   setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const handleLog = (e: any) => {
+  const handleLog = (e) => {
     e.preventDefault();
 
-    axios
-      .post(`${BASE_URL}/auth/login`, values)
-      .then((res) => {
-        if (res.status === 200) {
-          router.push("/search");
-          setUser(res.data);
-        }
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(
-            "Error msg:",
-            `${err.response.status} - ${err.response.data}`
-          );
-        }
-      });
+    //   axios
+    //     .post(`${BASE_URL}/auth/login`, values)
+    //     .then((res) => {
+    //       if (res.status === 200) {
+    //         router.push("/search");
+    //         setUser(res.data);
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       if (err.response) {
+    //         console.log(
+    //           "Error msg:",
+    //           `${err.response.status} - ${err.response.data}`
+    //         );
+    //       }
+    //     });
   };
 
   return (
     <>
+      <Navbar />
       <GradientCircle
         size={"large"}
         color={"purple"}
@@ -58,7 +62,7 @@ export default function Page() {
       />
       <div className="bg"></div>
       <main className="container">
-        <p className="left-side">Welcome back .!</p>
+        <p className="left-side">Welcome back!</p>
         <div className="right-side">
           <div className="form-container">
             <form className="form" onSubmit={handleLog}>
@@ -91,7 +95,7 @@ export default function Page() {
               <button className="btn btn-login">Login</button>
             </form>
             <p className="footer">
-              Don't have an account ? <Link href="/signin">Sign in</Link>
+              Don't have an account ? <Link to="/signup">Sign in</Link>
             </p>
           </div>
         </div>
@@ -99,3 +103,4 @@ export default function Page() {
     </>
   );
 }
+export default Login
