@@ -22,7 +22,7 @@ const Signup = () => {
 
   const [errors, setErrors] = useState({});
 
-  // const [serverErrors, setServerErrors] = useState([]);
+  const [serverErrors, setServerErrors] = useState([]);
 
   const handleChange = (event) => {
     console.log({ [event.target.name]: event.target.value })
@@ -52,11 +52,10 @@ const Signup = () => {
           // }
         })
         .catch((err) => {
-          if (err.response) {
-            console.log(
-              "Error msg:",
-              `${err.response.status} - ${err.response.data}`
-            );
+          if (err.response.data.errors) {
+            setServerErrors(err.response.data.errors)
+          } else {
+            console.log(err)
           }
         });
     }
@@ -131,6 +130,7 @@ const Signup = () => {
                 />
                 {!!errors.password && <p className="error">{errors.password}</p>}
               </div>
+              {serverErrors.length > 0 && (serverErrors.map((error, index) => (<p key={index} className="error">{error.msg}</p>)))}
               <button className="btn btn-signin">Sign up</button>
             </form>
             <p className="footer">
