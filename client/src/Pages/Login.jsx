@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import axios from "axios";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify'
 
@@ -9,6 +9,7 @@ import { BASE_URL } from "../Utils/Constants";
 import GradientCircle from "../Components/GradientCircle";
 import Navbar from "../Components/Navbar";
 import Validation from "../Utils/Validation";
+import { UserContext } from "../App";
 
 import "react-toastify/dist/ReactToastify.css"
 import "../assets/css/login.css";
@@ -23,10 +24,11 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [serverErrors, setServerErrors] = useState([]);
 
+  const { setUser } = useContext(UserContext)
+
   const navigate = useNavigate()
 
   const handleChange = (event) => {
-    console.log({ [event.target.name]: event.target.value })
     setValues({ ...values, [event.target.name]: event.target.value });
   };
 
@@ -37,7 +39,6 @@ const Login = () => {
     setErrors(errs);
 
     if (!errs.name || !errs.email || !errs.password) {
-      console.log("Form submitted successfully");
       axios
         .post(`${BASE_URL}contactmsyt/login`, values)
         .then((res) => {
@@ -49,6 +50,8 @@ const Login = () => {
               closeOnClick: true,
               //bodyStyle:{} //TODO: Style it
             })
+            localStorage.setItem("token", res.data.token)
+            setUser(res.data.user)
             navigate("/"); //TODO: Change to SEARCH page when done
           }
         })

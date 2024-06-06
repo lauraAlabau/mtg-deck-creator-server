@@ -1,10 +1,16 @@
 
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import "../assets/css/navbar.css";
 
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 
+import { UserContext } from "../App";
+
+import "../assets/css/navbar.css";
+
 const Navbar = () => {
+
+  const { user } = useContext(UserContext)
 
   return (
     <nav className="navbar">
@@ -16,17 +22,17 @@ const Navbar = () => {
           />
         </Link>
 
-        <div className="navbar-pages">
+        {user && <div className="navbar-pages">
           <Link to="/search" className="navbar-link">Search</Link>
           <Link to="/favorites" className="navbar-link">Favorites</Link>
           <Link to="/deck" className="navbar-link">Deck</Link>
-        </div>
+        </div>}
 
       </div>
 
-      <button className="navbar-right">
+      {user && <button className="navbar-right">
         Logout <FaArrowRightFromBracket />
-      </button>
+      </button>}
 
     </nav>
   );
