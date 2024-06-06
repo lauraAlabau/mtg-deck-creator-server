@@ -2,7 +2,7 @@
 import axios from "axios";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify'
 
 import { BASE_URL } from "../Utils/Constants";
@@ -21,8 +21,9 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
-
   const [serverErrors, setServerErrors] = useState([]);
+
+  const navigate = useNavigate()
 
   const handleChange = (event) => {
     console.log({ [event.target.name]: event.target.value })
@@ -31,25 +32,25 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Signup Work In Progress')
+
     const errs = Validation(values);
     setErrors(errs);
 
-    if (!errors.name || !errors.email || !errors.password) {
+    if (!errs.name || !errs.email || !errs.password) {
       console.log("Form submitted successfully");
       axios
         .post(`${BASE_URL}contactmsyt/register`, values)
         .then((res) => {
-          toast.success("Account created successfully", {
-            position: "top-center",
-            autoClose: 5000,
-            theme: "dark",
-            closeOnClick: true
-          })
-          console.log({ res })
-          // if (res.status === 200) {
-          //   router.push("/search");
-          // }
+          if (res.data.success) {
+            toast.success("Account created successfully", {
+              position: "top-center",
+              autoClose: 5000,
+              theme: "dark",
+              closeOnClick: true,
+              //bodyStyle:{} //TODO: Style it
+            })
+            navigate("/"); //TODO: Change to SEARCH page when done
+          }
         })
         .catch((err) => {
           if (err.response.data.errors) {

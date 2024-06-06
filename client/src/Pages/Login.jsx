@@ -1,48 +1,65 @@
 /* eslint-disable react/no-unescaped-entities */
+import axios from "axios";
 
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify'
 
-// import { useContext, useState } from "react";
-// import axios from "axios";
-// import { BASE_URL } from "../_utils";
-// import { useRouter } from "next/navigation";
-// import { UserContext } from "../_contexts/UserContext";
-
-import "../assets/css/login.css";
+import { BASE_URL } from "../Utils/Constants";
 import GradientCircle from "../Components/GradientCircle";
-import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
+import Validation from "../Utils/Validation";
+
+import "react-toastify/dist/ReactToastify.css"
+import "../assets/css/login.css";
 
 const Login = () => {
-  // const router = useRouter();
-  // const [values, setValues] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-  // const { setUser } = useContext(UserContext);
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+  const [serverErrors, setServerErrors] = useState([]);
+
+  const navigate = useNavigate()
+
   const handleChange = (event) => {
-    console.log(event)
-    //   setValues({ ...values, [event.target.name]: event.target.value });
+    console.log({ [event.target.name]: event.target.value })
+    setValues({ ...values, [event.target.name]: event.target.value });
   };
 
-  const handleLog = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    //   axios
-    //     .post(`${BASE_URL}/auth/login`, values)
-    //     .then((res) => {
-    //       if (res.status === 200) {
-    //         router.push("/search");
-    //         setUser(res.data);
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       if (err.response) {
-    //         console.log(
-    //           "Error msg:",
-    //           `${err.response.status} - ${err.response.data}`
-    //         );
-    //       }
-    //     });
+    const errs = Validation(values);
+    setErrors(errs);
+
+    if (!errs.name || !errs.email || !errs.password) {
+      console.log("Form submitted successfully");
+      axios
+        .post(`${BASE_URL}contactmsyt/login`, values)
+        .then((res) => {
+          if (res.data.success) {
+            toast.success("Login successfully", {
+              position: "top-center",
+              autoClose: 5000,
+              theme: "dark",
+              closeOnClick: true,
+              //bodyStyle:{} //TODO: Style it
+            })
+            navigate("/"); //TODO: Change to SEARCH page when done
+          }
+        })
+        .catch((err) => {
+          if (err.response.data.errors) {
+            setServerErrors(err.response.data.errors)
+          } else {
+            console.log(err)
+          }
+        });
+    }
   };
 
   return (
@@ -54,6 +71,7 @@ const Login = () => {
         alignItems={"align-start"}
         justifyContent={"justify-center"}
       />
+
       <GradientCircle
         size={"medium"}
         color={"purple"}
@@ -71,7 +89,7 @@ const Login = () => {
         <p className="left-side">Welcome back!</p>
         <div className="right-side">
           <div className="form-container">
-            <form className="form" onSubmit={handleLog}>
+            <form className="form" onSubmit={handleSubmit}>
               <p className="form-title">Log in your account</p>
               <p className="form-summary">Glad you’re back!</p>
               <div className="form-group">
@@ -85,6 +103,7 @@ const Login = () => {
                   onChange={handleChange}
                   name="email"
                 />
+                {!!errors.email && <p className="error">{errors.email}</p>}
               </div>
               <div className="form-group">
                 <label htmlFor="password" className="form-label">
@@ -97,7 +116,9 @@ const Login = () => {
                   onChange={handleChange}
                   name="password"
                 />
+                {!!errors.password && <p className="error">{errors.password}</p>}
               </div>
+              {serverErrors.length > 0 && (serverErrors.map((error, index) => (<p key={index} className="error">{error.msg}</p>)))}
               <button className="btn btn-login">Login</button>
             </form>
             <p className="footer">
