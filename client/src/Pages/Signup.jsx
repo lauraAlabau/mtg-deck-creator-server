@@ -49,7 +49,7 @@ const Signup = () => {
               closeOnClick: true,
               //bodyStyle:{} //TODO: Style it
             })
-            navigate("/"); //TODO: Change to SEARCH page when done
+            navigate("/search"); //TODO: Change to SEARCH page when done
           }
         })
         .catch((err) => {
