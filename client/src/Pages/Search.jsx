@@ -114,7 +114,7 @@ const Search = () => {
         alignItems={"align-end"}
         justifyContent={"justify-center"}
       />
-      <div className="bg"></div>
+      <div className="search-bg"></div>
       <main className="view-container">
         <div className="main-container">
           <div className="flex-container">

@@ -3,7 +3,7 @@
 import GradientCircle from "../Components/GradientCircle.jsx";
 import Navbar from "../Components/Navbar.jsx";
 
-
+import "../assets/css/deck.css";
 
 const Deck = () => {
 
@@ -29,9 +29,12 @@ const Deck = () => {
         alignItems={"align-end"}
         justifyContent={"justify-center"}
       />
-      {/* <div className="bg"></div> */}
+      <div className="deck-bg"></div>
       <main className="view-container">
-        WIP Deck
+        <div className="box-container">
+          <div className="deck-container">Deck</div>
+          <div className="side-container">Sideboard</div>
+        </div>
       </main>
     </>
   );
