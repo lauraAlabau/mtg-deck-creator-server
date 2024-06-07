@@ -1,6 +1,10 @@
 import { useState } from "react";
-import GradientCircle from "../Components/GradientCircle"
-import Navbar from "../Components/Navbar"
+
+import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { PiCards } from "react-icons/pi";
+
+import GradientCircle from "../Components/GradientCircle";
+import Navbar from "../Components/Navbar";
 import SearchBar from "../Components/SearchBar";
 
 import "../assets/css/search.css";
@@ -23,10 +27,12 @@ const Search = () => {
   return (
     <>
       <Navbar />
-      <SearchBar handleSearch={handleSearch}
+      <SearchBar
+        handleSearch={handleSearch}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        setIncludeUniques={setIncludeUniques} />
+        setIncludeUniques={setIncludeUniques}
+      />
       <GradientCircle
         size={"large"}
         color={"green"}
@@ -51,9 +57,29 @@ const Search = () => {
         <div className="main-container">
           <div className="flex-container">
             {cards.map((card) => (
-              <div key={card.id} >
+              <div key={card.id} className="image-container">
                 {card.image_uris?.png && (
-                  <img src={card.image_uris.png} alt={card.name} className="card" />
+                  <>
+                    <img
+                      src={card.image_uris.png}
+                      alt={card.name}
+                      className="image"
+                    />
+                    <div className="btn-actions">
+                      <div className="tooltip">
+                        <button className="btn fav">
+                          <MdOutlineFavoriteBorder />
+                        </button>
+                        <span className="tooltiptext fav">Add to Favorites</span>
+                      </div>
+                      <div className="tooltip">
+                        <button className="btn deck">
+                          <PiCards />
+                        </button>
+                        <span className="tooltiptext deck">Add to Deck</span>
+                      </div>
+                    </div>
+                  </>
                 )}
               </div>
             ))}
@@ -61,7 +87,7 @@ const Search = () => {
         </div>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
