@@ -31,6 +31,9 @@
 .blue {
   background: linear-gradient(to bottom, #190061, #0a1b30);
 }
+.cyan {
+  background: linear-gradient(to bottom, #004c61, #0a2530);
+}
 .green {
   background: linear-gradient(to bottom, #67691c, #090a02);
 }

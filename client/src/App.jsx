@@ -10,6 +10,8 @@ import Login from './Pages/Login'
 
 import { BASE_URL } from "./Utils/Constants.js";
 import Search from "./Pages/Search.jsx";
+import Favorites from "./Pages/Favorites.jsx";
+import Deck from "./Pages/Deck.jsx";
 
 export const UserContext = createContext(null);
 
@@ -30,6 +32,18 @@ const router = createBrowserRouter([
     path: '/search',
     element: <Search />
   },
+  {
+    path: '/favorites',
+    element: <Favorites />
+  },
+  {
+    path: '/deck',
+    element: <Deck />
+  },
+  {
+    path: '/profile',
+    element: <>Profile</>
+  }
 ])
 
 const App = () => {
