@@ -15,7 +15,7 @@ const CreateFavorite = async (req, res) => {
   try {
     const findUser = await UserModel.findById(req.user._id)
 
-    const favoriteExist = findUser.favorites.find(fav => fav.apiId === id)
+    const favoriteExist = findUser.decks.find(fav => fav.apiId === id)
 
     if (favoriteExist) {
       return res.status(400).json({
@@ -31,6 +31,16 @@ const CreateFavorite = async (req, res) => {
     console.log(err)
     return res.status(500).json({ error: err.message })
   }
+}
+
+const GetFavorites = async (req, res) => {
+
+  const findUser = await UserModel.findById(req.user._id)
+
+  const favorites = findUser.favorites
+
+  return res.status(200).json({ success: true, favorites: favorites })
+
 }
 
 const CreateDeck = async (req, res) => {
@@ -58,6 +68,16 @@ const CreateDeck = async (req, res) => {
   }
 }
 
+const GetDeck = async (req, res) => {
+
+  const findUser = await UserModel.findById(req.user._id)
+
+  const decks = findUser.decks
+
+  return res.status(200).json({ success: true, decks: decks })
+
+}
 
 
-export { CreateFavorite, CreateDeck }
+
+export { CreateFavorite, CreateDeck, GetFavorites, GetDeck }

@@ -3,7 +3,7 @@ import express from 'express'
 import { Register, Login, Auth } from '../controller/userController.js'
 import { body } from 'express-validator'
 import { VerifyUser } from '../middleware/VerifyUser.js'
-import { CreateFavorite, CreateDeck } from '../controller/cardController.js'
+import { CreateFavorite, CreateDeck, GetFavorites } from '../controller/cardController.js'
 
 const router = express.Router()
 
@@ -22,6 +22,8 @@ router.get('/verify', VerifyUser, Auth)
 
 
 router.post('/add-favorite', VerifyUser, CreateFavorite)
+
+router.get('/favorites', VerifyUser, GetFavorites)
 
 router.post('/add-deck', VerifyUser, CreateDeck)
 
