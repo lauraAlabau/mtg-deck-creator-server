@@ -1,14 +1,18 @@
-import { useState } from "react";
+import axios from "axios";
 
+import { useState } from "react";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { PiCards } from "react-icons/pi";
+import { toast } from "react-toastify";
 
 import GradientCircle from "../Components/GradientCircle";
 import Navbar from "../Components/Navbar";
 import SearchBar from "../Components/SearchBar";
 
-import "../assets/css/search.css";
 import { getCardSearch } from "../services/useCardsApi.js";
+import { BASE_URL } from "../Utils/Constants.js";
+
+import "../assets/css/search.css";
 
 const Search = () => {
   const [cards, setCards] = useState([]);
@@ -25,7 +29,61 @@ const Search = () => {
   };
 
   const handleAddToFavorites = async (card) => {
-    console.log('Will be add to Favs', card)
+
+    const values = card
+    axios
+      .post(`${BASE_URL}contactmsyt/add-favorite`, values
+        ,
+        {
+          headers: {
+            Authorization: `Berear ${localStorage.getItem("token")}`
+          }
+        }
+      )
+      .then((res) => {
+        if (res.data.success) {
+          toast.success("Card added to Favorites successfully", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+            closeOnClick: true,
+            //bodyStyle:{} //TODO: Style it
+          })
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+
+  }
+
+  const handleAddToDeck = async (card) => {
+
+    const values = card
+    axios
+      .post(`${BASE_URL}contactmsyt/add-deck`, values
+        ,
+        {
+          headers: {
+            Authorization: `Berear ${localStorage.getItem("token")}`
+          }
+        }
+      )
+      .then((res) => {
+        if (res.data.success) {
+          toast.success("Card added to Deck successfully", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+            closeOnClick: true,
+            //bodyStyle:{} //TODO: Style it
+          })
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+
   }
 
   return (
@@ -77,7 +135,7 @@ const Search = () => {
                         <span className="tooltiptext fav">Add to Favorites</span>
                       </div>
                       <div className="tooltip">
-                        <button className="btn deck" onClick={() => console.log('Will be add to Deck', card)}>
+                        <button className="btn deck" onClick={() => handleAddToDeck(card)}>
                           <PiCards />
                         </button>
                         <span className="tooltiptext deck">Add to Deck</span>
