@@ -3,6 +3,7 @@ import express from 'express'
 import { Register, Login, Auth } from '../controller/userController.js'
 import { body } from 'express-validator'
 import { VerifyUser } from '../middleware/VerifyUser.js'
+import { CreateFavorite, CreateDeck } from '../controller/cardController.js'
 
 const router = express.Router()
 
@@ -18,5 +19,10 @@ router.post('/login', [
 ], Login)
 
 router.get('/verify', VerifyUser, Auth)
+
+
+router.post('/add-favorite', VerifyUser, CreateFavorite)
+
+router.post('/add-deck', VerifyUser, CreateDeck)
 
 export { router as Router }

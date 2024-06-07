@@ -16,19 +16,19 @@ const UserSchema = new Schema({
   },
   favorites: [
     {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Mixed,
       ref: "Card",
     },
   ],
   decks: [
     {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Mixed,
       ref: "Card",
     },
   ],
   sideboard: [
     {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Mixed,
       ref: "Card",
     },
   ]
