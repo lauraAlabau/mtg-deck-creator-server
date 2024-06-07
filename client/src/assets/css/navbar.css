@@ -10,6 +10,7 @@
   background-color: #151d20;
   font-size: 14px;
   text-transform: uppercase;
+  z-index: 9999;
 }
 
 .navbar-left {
@@ -38,7 +39,8 @@
 
 .navbar-right {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  flex-direction: column;
   gap: 12px;
   background: none;
   border: none;
@@ -48,7 +50,39 @@
   cursor: pointer;
 }
 
-.nav-pages a:hover,
-.nav-btn:hover {
-  color: #fff;
+.navbar-btn {
+  color: #c2d1d6;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  list-style-type: none;
+  top: 30px;
+  right: 6px;
+  border: 1px solid #4d4d4d;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 25px;
+  border-radius: 10px 0px 10px 10px;
+  background-color: #151d20;
+}
+
+.menu > div {
+  backdrop-filter: blur(20px);
+}
+
+.menu-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
 }
