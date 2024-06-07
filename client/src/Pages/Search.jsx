@@ -67,13 +67,13 @@ const Search = () => {
                     />
                     <div className="btn-actions">
                       <div className="tooltip">
-                        <button className="btn fav">
+                        <button className="btn fav" onClick={() => console.log('Will be add to Favs', card)}>
                           <MdOutlineFavoriteBorder />
                         </button>
                         <span className="tooltiptext fav">Add to Favorites</span>
                       </div>
                       <div className="tooltip">
-                        <button className="btn deck">
+                        <button className="btn deck" onClick={() => console.log('Will be add to Deck', card)}>
                           <PiCards />
                         </button>
                         <span className="tooltiptext deck">Add to Deck</span>
