@@ -24,6 +24,10 @@ const Search = () => {
     }
   };
 
+  const handleAddToFavorites = async (card) => {
+    console.log('Will be add to Favs', card)
+  }
+
   return (
     <>
       <Navbar />
@@ -58,16 +62,16 @@ const Search = () => {
           <div className="flex-container">
             {cards.map((card) => (
               <div key={card.id} className="image-container">
-                {card.image_uris?.png && (
+                {card.image_uris?.normal && (
                   <>
                     <img
-                      src={card.image_uris.png}
+                      src={card.image_uris.normal}
                       alt={card.name}
                       className="image"
                     />
                     <div className="btn-actions">
                       <div className="tooltip">
-                        <button className="btn fav" onClick={() => console.log('Will be add to Favs', card)}>
+                        <button className="btn fav" onClick={() => handleAddToFavorites(card)}>
                           <MdOutlineFavoriteBorder />
                         </button>
                         <span className="tooltiptext fav">Add to Favorites</span>
