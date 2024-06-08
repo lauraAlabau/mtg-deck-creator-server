@@ -8,8 +8,10 @@ import {
   CreateDeck,
   GetFavorites,
   GetDeck,
+  DeleteDeck,
   CreateSideboard,
   GetSideboard,
+  DeleteSideboard,
 } from "../controller/cardController.js";
 
 const router = express.Router();
@@ -63,8 +65,12 @@ router.post("/add-deck", VerifyUser, CreateDeck);
 
 router.get("/deck", VerifyUser, GetDeck);
 
+router.put("/delete-deck", VerifyUser, DeleteDeck);
+
 router.post("/add-sideboard", VerifyUser, CreateSideboard);
 
 router.get("/sideboard", VerifyUser, GetSideboard);
+
+router.put("/delete-sideboard", VerifyUser, DeleteSideboard);
 
 export { router as Router };

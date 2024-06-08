@@ -1,8 +1,5 @@
 import express from "express";
 
-import { validationResult } from "express-validator";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { UserModel } from "../models/User.js";
 
@@ -78,6 +75,24 @@ const GetDeck = async (req, res) => {
   }
 };
 
+const DeleteDeck = async (req, res) => {
+  const { apiId } = req.body;
+
+  try {
+    const findUser = await UserModel.findById(req.user._id);
+
+    const cardIndex = findUser.decks.findIndex((card) => card.apiId === apiId);
+
+    findUser.decks.splice(cardIndex, 1);
+    await findUser.save();
+
+    return res.status(200).json({ success: true, decks: findUser.decks });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 const CreateSideboard = async (req, res) => {
   const { apiId, ...sideBoardData } = req.body;
 
@@ -92,7 +107,7 @@ const CreateSideboard = async (req, res) => {
       });
     }
 
-    findUser.sideboard.push({ apiId: id, ...sideBoardData });
+    findUser.sideboard.push({ apiId: apiId, ...sideBoardData });
     await findUser.save();
 
     return res.status(201).json({ success: true, decks: findUser.sideboard });
@@ -112,11 +127,35 @@ const GetSideboard = async (req, res) => {
   }
 };
 
+const DeleteSideboard = async (req, res) => {
+  const { apiId } = req.body;
+
+  try {
+    const findUser = await UserModel.findById(req.user._id);
+
+    const cardIndex = findUser.sideboard.findIndex(
+      (card) => card.apiId === apiId
+    );
+
+    findUser.sideboard.splice(cardIndex, 1);
+    await findUser.save();
+
+    return res
+      .status(200)
+      .json({ success: true, sideboard: findUser.sideboard });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 export {
   CreateFavorite,
   CreateDeck,
   GetFavorites,
   GetDeck,
+  DeleteDeck,
   CreateSideboard,
   GetSideboard,
+  DeleteSideboard,
 };
