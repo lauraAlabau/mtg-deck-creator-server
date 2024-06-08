@@ -32,13 +32,12 @@ const CardSchema = new Schema(
     set: { type: String },
     set_name: { type: String },
     type_line: { type: String },
-    amount_deck: { type: Number },
-    amount_sideboard: { type: Number },
+    amount_deck: { type: String },
+    amount_sideboard: { type: String },
   },
   {
     timestamps: true,
   }
 );
-
 
 export const CardModel = model("Card", CardSchema);
