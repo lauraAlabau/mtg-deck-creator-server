@@ -13,6 +13,8 @@ import Search from "./Pages/Search.jsx";
 import Favorites from "./Pages/Favorites.jsx";
 import Deck from "./Pages/Deck.jsx";
 import Logout from "./Pages/Logout.jsx";
+import ProtectedRoutes from "./Components/ProtectedRoutes.jsx";
+import NotFound from "./Pages/NotFound.jsx";
 
 export const UserContext = createContext(null);
 
@@ -31,15 +33,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/search",
-    element: <Search />,
+    element: (
+      <ProtectedRoutes>
+        <Search />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/favorites",
-    element: <Favorites />,
+    element: (
+      <ProtectedRoutes>
+        <Favorites />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/deck",
-    element: <Deck />,
+    element: (
+      <ProtectedRoutes>
+        <Deck />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/profile",
@@ -48,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/logout",
     element: <Logout />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

@@ -280,23 +280,23 @@ const Deck = () => {
     <>
       <Navbar />
       <GradientCircle
+        size={"medium"}
+        color={"violet"}
+        alignItems={"align-end"}
+        justifyContent={"justify-start"}
+      />
+
+      <GradientCircle
         size={"large"}
         color={"violet"}
         alignItems={"align-start"}
         justifyContent={"justify-center"}
       />
-
-      <GradientCircle
-        size={"medium"}
-        color={"violet"}
-        alignItems={"align-center"}
-        justifyContent={"justify-end"}
-      />
       <GradientCircle
         size={"small"}
         color={"violet"}
-        alignItems={"align-end"}
-        justifyContent={"justify-center"}
+        alignItems={"align-center"}
+        justifyContent={"justify-end"}
       />
       <div className="deck-bg"></div>
 
