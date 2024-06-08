@@ -29,17 +29,13 @@ const Search = () => {
   };
 
   const handleAddToFavorites = async (card) => {
-
-    const values = card
+    const values = card;
     axios
-      .post(`${BASE_URL}contactmsyt/add-favorite`, values
-        ,
-        {
-          headers: {
-            Authorization: `Berear ${localStorage.getItem("token")}`
-          }
-        }
-      )
+      .post(`${BASE_URL}contactmsyt/add-favorite`, values, {
+        headers: {
+          Authorization: `Berear ${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
         if (res.data.success) {
           toast.success("Card added to Favorites successfully", {
@@ -48,27 +44,26 @@ const Search = () => {
             theme: "dark",
             closeOnClick: true,
             //bodyStyle:{} //TODO: Style it
-          })
+          });
         }
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
       });
-
-  }
+  };
 
   const handleAddToDeck = async (card) => {
+    const values = {
+      ...card,
+      amount_deck: "1",
+    };
 
-    const values = card
     axios
-      .post(`${BASE_URL}contactmsyt/add-deck`, values
-        ,
-        {
-          headers: {
-            Authorization: `Berear ${localStorage.getItem("token")}`
-          }
-        }
-      )
+      .post(`${BASE_URL}contactmsyt/add-deck`, values, {
+        headers: {
+          Authorization: `Berear ${localStorage.getItem("token")}`,
+        },
+      })
       .then((res) => {
         if (res.data.success) {
           toast.success("Card added to Deck successfully", {
@@ -77,14 +72,13 @@ const Search = () => {
             theme: "dark",
             closeOnClick: true,
             //bodyStyle:{} //TODO: Style it
-          })
+          });
         }
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
       });
-
-  }
+  };
 
   return (
     <>
@@ -129,13 +123,21 @@ const Search = () => {
                     />
                     <div className="btn-actions">
                       <div className="tooltip">
-                        <button className="btn fav" onClick={() => handleAddToFavorites(card)}>
+                        <button
+                          className="btn fav"
+                          onClick={() => handleAddToFavorites(card)}
+                        >
                           <MdOutlineFavoriteBorder />
                         </button>
-                        <span className="tooltiptext fav">Add to Favorites</span>
+                        <span className="tooltiptext fav">
+                          Add to Favorites
+                        </span>
                       </div>
                       <div className="tooltip">
-                        <button className="btn deck" onClick={() => handleAddToDeck(card)}>
+                        <button
+                          className="btn deck"
+                          onClick={() => handleAddToDeck(card)}
+                        >
                           <PiCards />
                         </button>
                         <span className="tooltiptext deck">Add to Deck</span>

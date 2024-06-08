@@ -20,17 +20,75 @@
   border-radius: 20px;
   padding: 40px;
   border: 1px solid #4d4d4d;
+  min-width: 1000px;
+  min-height: 400px;
 }
 
 .deck-container {
   border-right: 1px solid #4d4d4d;
   padding: 40px;
+  padding-left: 0px;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 20px;
 }
 
 .side-container {
   padding: 40px;
+  padding-right: 0px;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 20px;
+}
+
+.cell-text {
+  width: 200px;
+  font-size: 16px;
+  padding-right: 10px;
+}
+
+.cell-action {
+  display: flex;
+  gap: 10px;
+}
+
+.table-icon {
+  width: 50px;
+  height: 50px;
+  padding: 8px;
+}
+
+.table-icon:hover {
+  cursor: pointer;
+  transform: scale(1.25);
+}
+
+.table-icon-left {
+  color: #f8bd00;
+}
+
+.table-icon-right {
+  color: #a10000;
+}
+
+.input-num {
+  width: 60px;
+  font-size: 16px;
+  background-color: #333333af;
+  border: none;
+  padding: 7px;
+  color: antiquewhite;
+  text-align: center;
+  border-radius: 6px;
+}
+
+input[type="number"]:focus-visible {
+  outline: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
