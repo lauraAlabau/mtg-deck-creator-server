@@ -83,7 +83,10 @@ const Deck = () => {
             className="table-icon table-icon-left"
             onClick={() => handleMove("toSideboard", row)}
           />
-          <FaRegTrashCan className="table-icon table-icon-right" />
+          <FaRegTrashCan
+            className="table-icon table-icon-right"
+            onClick={() => handleRemove("fromDeck", row)}
+          />
         </div>
       ),
       //right: true,
@@ -115,18 +118,20 @@ const Deck = () => {
             className="table-icon table-icon-left"
             onClick={() => handleMove("toDeck", row)}
           />
-          <FaRegTrashCan className="table-icon table-icon-right" />
+          <FaRegTrashCan
+            className="table-icon table-icon-right"
+            onClick={() => handleRemove("fromSideboard", row)}
+          />
         </div>
       ),
       // right: true,
     },
   ];
 
-  const handleMove = (toTable, values) => {
-    console.log("***", toTable, values);
+  const handleMove = (toTable, card) => {
     if (toTable === "toSideboard") {
       const value = {
-        ...values,
+        ...card,
         amount_sideboard: "1",
       };
       axios
@@ -153,12 +158,64 @@ const Deck = () => {
     }
     if (toTable === "toDeck") {
       const value = {
-        ...values,
-        id: values.apiId,
+        ...card,
+        id: card.apiId,
         amount_deck: "1",
       };
       axios
         .post(`${BASE_URL}contactmsyt/add-deck`, value, {
+          headers: {
+            Authorization: `Berear ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          if (res.data.success) {
+            toast.success("Card added to Sideboard successfully", {
+              position: "top-center",
+              autoClose: 3000,
+              theme: "dark",
+              closeOnClick: true,
+              pauseOnFocusLoss: false,
+              //bodyStyle:{} //TODO: Style it
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const handleRemove = (fromTable, card) => {
+    console.log("***", fromTable, card);
+    if (fromTable === "fromDeck") {
+      console.log("from Deck");
+
+      axios
+        .put(`${BASE_URL}contactmsyt/delete-deck`, card, {
+          headers: {
+            Authorization: `Berear ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          if (res.data.success) {
+            toast.success("Card added to Sideboard successfully", {
+              position: "top-center",
+              autoClose: 3000,
+              theme: "dark",
+              closeOnClick: true,
+              pauseOnFocusLoss: false,
+              //bodyStyle:{} //TODO: Style it
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    if (fromTable === "fromSideboard") {
+      axios
+        .put(`${BASE_URL}contactmsyt/delete-sideboard`, card, {
           headers: {
             Authorization: `Berear ${localStorage.getItem("token")}`,
           },
