@@ -25,12 +25,10 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-
         <img
           alt="logo"
           src="https://utfs.io/f/c41b25e1-91e1-49bd-bdf1-44f19f610f49-1evuz.webp"
         />
-
 
         {user && (
           <div className="navbar-pages">
@@ -55,12 +53,16 @@ const Navbar = () => {
           {open ? (
             <>
               <div className="menu">
-                <div className={`menu-item navbar-link ${getActiveLink("/profile")}`}>
+                <div
+                  className={`menu-item navbar-link ${getActiveLink(
+                    "/profile"
+                  )}`}
+                >
                   <FiSettings />
                   <Link to="/profile">Settings</Link>
                 </div>
                 <div className="menu-item navbar-link">
-                  <FaArrowRightFromBracket /> <p>Logout </p>
+                  <FaArrowRightFromBracket /> <Link to="/logout">Logout</Link>
                 </div>
               </div>
             </>
