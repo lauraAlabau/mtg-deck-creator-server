@@ -242,7 +242,7 @@ const Deck = () => {
     setLoadingDeck(true);
     setLoadingSideboard(true);
     axios
-      .get(`https://mtg-deck-creator-server.vercel.app/contactmsyt/deck`, {
+      .get(`${BASE_URL}contactmsyt/deck`, {
         headers: {
           Authorization: `Berear ${localStorage.getItem("token")}`,
         },
