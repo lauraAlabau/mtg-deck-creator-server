@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || origin.startsWith("https://mtg-deck-creator-client-")) {
+      if (!origin || origin.startsWith("https://mtg-deck-creator-client")) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
