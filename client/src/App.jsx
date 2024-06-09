@@ -74,7 +74,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}contactmsyt/verify`, {
+      .get(`https://mtg-deck-creator-server.vercel.app/contactmsyt/verify`, {
         headers: {
           Authorization: `Berear ${localStorage.getItem("token")}`,
         },
