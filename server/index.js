@@ -8,9 +8,15 @@ import "./config/db.js";
 
 const app = express();
 app.use(express.json());
+
+const allowedOrigins = [
+  "https://mtg-deck-creator-client.vercel.app",
+  "https://mtg-deck-creator-client-2jk07ay6c-lauraalabaus-projects.vercel.app",
+];
+
 app.use(
   cors({
-    origin: ["https://mtg-deck-creator-client.vercel.app/"],
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
