@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/contactmsyt/search",
+    path: "/search",
     element: (
       <ProtectedRoutes>
         <Search />
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/contactmsyt/favorites",
+    path: "/favorites",
     element: (
       <ProtectedRoutes>
         <Favorites />
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/contactmsyt/deck",
+    path: "/deck",
     element: (
       <ProtectedRoutes>
         <Deck />

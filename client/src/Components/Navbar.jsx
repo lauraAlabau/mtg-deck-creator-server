@@ -33,13 +33,13 @@ const Navbar = () => {
         {user && (
           <div className="navbar-pages">
             <div className={`navbar-link ${getActiveLink("/search")}`}>
-              <Link to="/contactmsyt/search">Search</Link>
+              <Link to="/search">Search</Link>
             </div>
             <div className={`navbar-link ${getActiveLink("/favorites")}`}>
-              <Link to="/contactmsyt/favorites">Favorites</Link>
+              <Link to="/favorites">Favorites</Link>
             </div>
             <div className={`navbar-link ${getActiveLink("/deck")}`}>
-              <Link to="/contactmsyt/deck">Deck</Link>
+              <Link to="/deck">Deck</Link>
             </div>
           </div>
         )}
