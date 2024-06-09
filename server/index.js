@@ -9,14 +9,19 @@ import "./config/db.js";
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = [
-  "https://mtg-deck-creator-client.vercel.app",
-  "https://mtg-deck-creator-client-2jk07ay6c-lauraalabaus-projects.vercel.app",
-];
+// const allowedOrigins = [
+//   "https://mtg-deck-creator-client.vercel.app"
+// ];
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      if (!origin || origin.startsWith("https://mtg-deck-creator-client-")) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
