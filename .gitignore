@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-/server_old
 
 # local env files
 .env

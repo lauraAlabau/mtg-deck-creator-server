@@ -110,7 +110,9 @@ const CreateSideboard = async (req, res) => {
     findUser.sideboard.push({ apiId: apiId, ...sideBoardData });
     await findUser.save();
 
-    return res.status(201).json({ success: true, decks: findUser.sideboard });
+    return res
+      .status(201)
+      .json({ success: true, sideboard: findUser.sideboard });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: err.message });
